@@ -21,28 +21,28 @@ ORIG = "Record Game 2.age3rec"
 DATE_TIME = time.strftime("%d_%m_%Y")
 PATH = r"C:\Users\Kyle\Documents\My Games\Age of Empires 3\Savegame"
 
+if __name__ == '__main__':
+    #handle arg
+    try:
+        rename = sys.argv[1]
+    except IndexError:
+        print "[ERROR]: useage: replay_sort.py <new filename>"
+        sys.exit(1)
 
-#handle arg
-try:
-    rename = sys.argv[1]
-except IndexError:
-    print "[ERROR]: useage: replay_sort.py <new filename>"
-    sys.exit(1)
+    #Go to directory
+    try:
+        os.chdir(PATH)
+    except Exception:
+        print "That directory does not exist"
+        sys.exit(1)
 
-#Go to directory
-try:
-    os.chdir(PATH)
-except Exception:
-    print "That directory does not exist"
-    sys.exit(1)
+    #look for Record Game 1
+    replays = glob.glob("*.age3rec")
+    if ORIG not in replays:
+        print "There is no recently recorded game to be found  (Record Game 1.age3rec)"
+        sys.exit(1)
 
-#look for Record Game 1
-replays = glob.glob("*.age3rec")
-if ORIG not in replays:
-    print "There is no recently recorded game to be found  (Record Game 1.age3rec)"
-    sys.exit(1)
-
-#change to new name and save
-new_file = rename + "_" + DATE_TIME
-os.rename(ORIG, new_file)
-print "[SUCCESS]: " + ORIG + " has been renamed to " + new_file + ".age3rec"
+    #change to new name and save
+    new_file = rename + "_" + DATE_TIME
+    os.rename(ORIG, new_file)
+    print "[SUCCESS]: " + ORIG + " has been renamed to " + new_file + ".age3rec"
