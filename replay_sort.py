@@ -1,22 +1,48 @@
 import os
 import glob
+import time
+import sys
 
 """
 AOE3 Replay Sort
 
-Age of Empires 3 replays are saved to generic default names (age3rec1.rec) which make it difficult
+Age of Empires 3 replays are saved to generic default names (Save Game 1.age3rec) which make it difficult
 to find replays.
 
-The idea of this program is to scrape these replay files for information such as player names/civs and hopefully
-create a new file with a more descriptive name
+After I play a game I can run this script to rename the file
 
-currently a WIP
+(originally wanted to scrap the replay files for playername, civ used, map name etc..
+but the rec files are unreadable i a text editor)
 
 """
 
-def run():
+#Globals
+ORIG = "Record Game 2.age3rec"
+DATE_TIME = time.strftime("%d_%m_%Y")
+PATH = r"C:\Users\Kyle\Documents\My Games\Age of Empires 3\Savegame"
 
-def get_rec():
 
-if __name__ == '__main__':
-  run()
+#handle arg
+try:
+    rename = sys.argv[1]
+except IndexError:
+    print "[ERROR]: useage: replay_sort.py <new filename>"
+    sys.exit(1)
+
+#Go to directory
+try:
+    os.chdir(PATH)
+except Exception:
+    print "That directory does not exist"
+    sys.exit(1)
+
+#look for Record Game 1
+replays = glob.glob("*.age3rec")
+if ORIG not in replays:
+    print "There is no recently recorded game to be found  (Record Game 1.age3rec)"
+    sys.exit(1)
+
+#change to new name and save
+new_file = rename + "_" + DATE_TIME
+os.rename(ORIG, new_file)
+print "[SUCCESS]: " + ORIG + " has been renamed to " + new_file + ".age3rec"
