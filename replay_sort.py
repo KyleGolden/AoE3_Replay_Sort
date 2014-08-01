@@ -2,6 +2,7 @@ import os
 import glob
 import time
 import sys
+import getpass as gp
 
 """
 AOE3 Replay Sort
@@ -16,7 +17,7 @@ After I play a game I can run this script to rename the file
 #Globals
 ORIG = "Record Game 1.age3rec"
 DATE_TIME = time.strftime("%m-%d-%Y-%H.%M.%S")
-PATH = r"C:\Users\Kyle\Documents\My Games\Age of Empires 3\Savegame"
+PATH = "C:\\Users\\" + gp.getuser() + "\\Documents\\My Games\\Age of Empires 3\\Savegame"
 
 if __name__ == '__main__':
     #handle arg
@@ -31,6 +32,7 @@ if __name__ == '__main__':
     try:
         os.chdir(PATH)
     except Exception:
+        print(PATH)
         print("\n[ ERROR ]   :: The directory: %s does not exist" % PATH)
         sys.exit(1)
 
