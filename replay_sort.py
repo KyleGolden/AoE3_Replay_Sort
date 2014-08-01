@@ -11,14 +11,11 @@ to find replays.
 
 After I play a game I can run this script to rename the file
 
-(originally wanted to scrap the replay files for playername, civ used, map name etc..
-but the rec files are unreadable i a text editor)
-
 """
 
 #Globals
-ORIG = "Record Game 2.age3rec"
-DATE_TIME = time.strftime("%d_%m_%Y")
+ORIG = "Record Game 1.age3rec"
+DATE_TIME = time.strftime("%m-%d-%Y-%H.%M.%S")
 PATH = r"C:\Users\Kyle\Documents\My Games\Age of Empires 3\Savegame"
 
 if __name__ == '__main__':
@@ -26,23 +23,32 @@ if __name__ == '__main__':
     try:
         rename = sys.argv[1]
     except IndexError:
-        print "[ERROR]: useage: replay_sort.py <new filename>"
+        print("\n[ ERROR ]   :: Useage: %s <new name>" % __file__)
         sys.exit(1)
+
 
     #Go to directory
     try:
         os.chdir(PATH)
     except Exception:
-        print "That directory does not exist"
+        print("\n[ ERROR ]   :: The directory: %s does not exist" % PATH)
         sys.exit(1)
+
 
     #look for Record Game 1
     replays = glob.glob("*.age3rec")
+    print("\n[ LOG ]     :: Replays contained in %s\n" % os.getcwd())    
+
+
+    for r in replays:
+        print("\t\t- %s\n" % r)
+
+
     if ORIG not in replays:
-        print "There is no recently recorded game to be found  (Record Game 1.age3rec)"
+        print("[ ERROR ]   :: There are no recently recorded game to be found")
         sys.exit(1)
 
     #change to new name and save
     new_file = rename + "_" + DATE_TIME
     os.rename(ORIG, new_file)
-    print "[SUCCESS]: " + ORIG + " has been renamed to " + new_file + ".age3rec"
+    print ("[ SUCCESS ] :: " + ORIG + " has been renamed to " + new_file + ".age3rec")
