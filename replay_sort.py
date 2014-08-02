@@ -15,8 +15,8 @@ After I play a game I can run this script to rename the file
 """
 
 #Globals
-ORIG = "Record Game 1.age3Yrec"
-DATE_TIME = time.strftime("%m-%d-%Y-%H.%M.%S")
+ORIG = "1.age3Yrec"
+DATE_TIME = time.strftime("%m-%d-%Y_%H-%M-%S")
 PATH = "C:\\Users\\" + gp.getuser() + "\\Documents\\My Games\\Age of Empires 3\\Savegame"
 
 if __name__ == '__main__':
