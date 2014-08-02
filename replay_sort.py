@@ -15,7 +15,7 @@ After I play a game I can run this script to rename the file
 """
 
 #Globals
-ORIG = "Record Game 1.age3rec"
+ORIG = "Record Game 1.age3Yrec"
 DATE_TIME = time.strftime("%m-%d-%Y-%H.%M.%S")
 PATH = "C:\\Users\\" + gp.getuser() + "\\Documents\\My Games\\Age of Empires 3\\Savegame"
 
@@ -38,12 +38,11 @@ if __name__ == '__main__':
 
 
     #look for Record Game 1
-    replays = glob.glob("*.age3rec")
-    print("\n[ LOG ]     :: Replays contained in %s\n" % os.getcwd())    
-
-
-    for r in replays:
-        print("\t\t- %s\n" % r)
+    replays = glob.glob("*.age3Yrec")
+    if replays:
+        print("\n[ LOG ]     :: Replays contained in %s\n" % os.getcwd())    
+        for r in replays:
+            print("\t\t- %s\n" % r)
 
 
     if ORIG not in replays:
@@ -51,6 +50,6 @@ if __name__ == '__main__':
         sys.exit(1)
 
     #change to new name and save
-    new_file = rename + "_" + DATE_TIME
+    new_file = rename + "_" + DATE_TIME + ".age3Yrec"
     os.rename(ORIG, new_file)
-    print ("[ SUCCESS ] :: " + ORIG + " has been renamed to " + new_file + ".age3rec")
+    print ("[ SUCCESS ] :: " + ORIG + " has been renamed to " + new_file)
