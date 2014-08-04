@@ -12,10 +12,16 @@ to find replays.
 
 After I play a game I can run this script to rename the file
 
+Usage: 
+    $ python replay_sort <new name>
+    
+Example:
+    $ python replay_sort japan_v_russia_win
+
 """
 
 #Globals
-ORIG = "1.age3Yrec"
+ORIG = "Record Game 1.age3Yrec"
 DATE_TIME = time.strftime("%m-%d-%Y_%H-%M-%S")
 PATH = "C:\\Users\\" + gp.getuser() + "\\Documents\\My Games\\Age of Empires 3\\Savegame"
 
